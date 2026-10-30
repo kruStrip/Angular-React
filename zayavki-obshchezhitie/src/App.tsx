@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import Header from './components/Header'
 import RequestForm from './components/RequestForm'
 import RequestCard from './components/RequestCard'
-import { nextStatus, prevStatus, type NewRequest, type RequestItem, type Status } from './requests'
-import { loadRequests, saveRequests } from './storage'
+import type { NewRequest, Status } from './requests'
+import { useRequests } from './useRequests'
 import { sendRequest } from './notify'
 
 type Filter = 'Все' | Status
@@ -11,7 +11,7 @@ type Filter = 'Все' | Status
 const FILTERS: Filter[] = ['Все', 'Новая', 'В работе', 'Готово']
 
 function App() {
-  const [requests, setRequests] = useState(loadRequests)
+  const { requests, loading, error, retry, add, next, prev, remove } = useRequests()
   const [filter, setFilter] = useState<Filter>('Все')
   const [notice, setNotice] = useState('')
   const [search, setSearch] = useState('')
@@ -51,45 +51,43 @@ function App() {
     return requests.filter((r) => r.status === f).length
   }
 
-  function update(list: RequestItem[]) {
-    setRequests(list)
-    saveRequests(list)
-  }
-
-  function handleNext(id: number) {
-    const updated = requests.map((r) => {
-      if (r.id === id) {
-        return { ...r, status: nextStatus(r.status) }
-      }
-      return r
-    })
-    update(updated)
-  }
-
-  function handlePrev(id: number) {
-    const updated = requests.map((r) => {
-      if (r.id === id) {
-        return { ...r, status: prevStatus(r.status) }
-      }
-      return r
-    })
-    update(updated)
-  }
-
-  async function handleAdd(data: NewRequest) {
-    const created: RequestItem = { ...data, id: Date.now(), status: 'Новая' }
-    update([created, ...requests])
-    setNotice('Заявка добавлена. Отправляем уведомление…')
-    const sent = await sendRequest(created)
-    if (sent) {
-      setNotice('Заявка добавлена, уведомление отправлено.')
-    } else {
-      setNotice('Заявка добавлена, но уведомление не отправлено: сервер автоматизации недоступен.')
+  async function handleNext(id: string, status: Status) {
+    try {
+      await next(id, status)
+    } catch (e) {
+      setNotice((e as Error).message)
     }
   }
 
-  function handleRemove(id: number) {
-    update(requests.filter((r) => r.id !== id))
+  async function handlePrev(id: string, status: Status) {
+    try {
+      await prev(id, status)
+    } catch (e) {
+      setNotice((e as Error).message)
+    }
+  }
+
+  async function handleAdd(data: NewRequest) {
+    try {
+      const created = await add(data)
+      setNotice('Заявка добавлена. Отправляем уведомление…')
+      const sent = await sendRequest(created)
+      if (sent) {
+        setNotice('Заявка добавлена, уведомление отправлено.')
+      } else {
+        setNotice('Заявка добавлена, но уведомление не отправлено: сервер автоматизации недоступен.')
+      }
+    } catch (e) {
+      setNotice((e as Error).message)
+    }
+  }
+
+  async function handleRemove(id: string) {
+    try {
+      await remove(id)
+    } catch (e) {
+      setNotice((e as Error).message)
+    }
   }
 
   return (
@@ -114,7 +112,14 @@ function App() {
             value={search}
             onChange={(event) => setSearch(event.target.value)}
           />
-          {visible.length === 0 && <p className="empty">Заявок не найдено</p>}
+          {loading && <p className="empty">Загрузка заявок…</p>}
+          {error !== '' && (
+            <div className="load-error">
+              <p>{error}</p>
+              <button onClick={retry}>Повторить</button>
+            </div>
+          )}
+          {!loading && error === '' && visible.length === 0 && <p className="empty">Заявок не найдено</p>}
           {visible.map((r) => (
             <RequestCard
               key={r.id}
@@ -124,8 +129,8 @@ function App() {
               details={r.details}
               status={r.status}
               urgent={r.urgent}
-              onNext={() => handleNext(r.id)}
-              onPrev={() => handlePrev(r.id)}
+              onNext={() => handleNext(r.id, r.status)}
+              onPrev={() => handlePrev(r.id, r.status)}
               onRemove={() => handleRemove(r.id)}
             />
           ))}

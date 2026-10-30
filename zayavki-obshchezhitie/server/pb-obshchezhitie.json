@@ -1,0 +1,44 @@
+[
+  {
+    "name": "obshchezhitie",
+    "type": "base",
+    "listRule": "",
+    "viewRule": "",
+    "createRule": "@request.body.status = \"Новая\"",
+    "updateRule": "@request.body.title:isset = false && @request.body.room:isset = false && @request.body.details:isset = false",
+    "deleteRule": "status = \"Готово\"",
+    "fields": [
+      {
+        "name": "id",
+        "type": "text",
+        "system": true,
+        "primaryKey": true,
+        "required": true,
+        "autogeneratePattern": "[a-z0-9]{15}",
+        "pattern": "^[a-z0-9]+$",
+        "min": 15,
+        "max": 15
+      },
+      { "name": "title", "type": "text", "required": true },
+      { "name": "room", "type": "text", "required": true },
+      {
+        "name": "category",
+        "type": "select",
+        "required": true,
+        "maxSelect": 1,
+        "values": ["Сантехника", "Электрика", "Мебель", "Интернет"]
+      },
+      { "name": "details", "type": "text", "required": false },
+      { "name": "urgent", "type": "bool", "required": false },
+      {
+        "name": "status",
+        "type": "select",
+        "required": true,
+        "maxSelect": 1,
+        "values": ["Новая", "В работе", "Готово"]
+      },
+      { "name": "created", "type": "autodate", "onCreate": true, "onUpdate": false },
+      { "name": "updated", "type": "autodate", "onCreate": true, "onUpdate": true }
+    ]
+  }
+]
