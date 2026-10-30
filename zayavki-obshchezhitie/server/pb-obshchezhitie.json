@@ -1,5 +1,6 @@
 [
   {
+    "id": "pbc_3920114856",
     "name": "obshchezhitie",
     "type": "base",
     "listRule": "",
@@ -9,6 +10,7 @@
     "deleteRule": "status = \"Готово\"",
     "fields": [
       {
+        "id": "text3208210256",
         "name": "id",
         "type": "text",
         "system": true,
@@ -19,26 +21,71 @@
         "min": 15,
         "max": 15
       },
-      { "name": "title", "type": "text", "required": true },
-      { "name": "room", "type": "text", "required": true },
       {
+        "id": "text724990059",
+        "name": "title",
+        "type": "text",
+        "required": true
+      },
+      {
+        "id": "text1997877400",
+        "name": "room",
+        "type": "text",
+        "required": true
+      },
+      {
+        "id": "select105650625",
         "name": "category",
         "type": "select",
         "required": true,
         "maxSelect": 1,
-        "values": ["Сантехника", "Электрика", "Мебель", "Интернет"]
+        "values": [
+          "Сантехника",
+          "Электрика",
+          "Мебель",
+          "Интернет"
+        ]
       },
-      { "name": "details", "type": "text", "required": false },
-      { "name": "urgent", "type": "bool", "required": false },
       {
+        "id": "text3485334036",
+        "name": "details",
+        "type": "text",
+        "required": false
+      },
+      {
+        "id": "bool1643296232",
+        "name": "urgent",
+        "type": "bool",
+        "required": false
+      },
+      {
+        "id": "select2063623452",
         "name": "status",
         "type": "select",
         "required": true,
         "maxSelect": 1,
-        "values": ["Новая", "В работе", "Готово"]
+        "values": [
+          "Новая",
+          "В работе",
+          "Готово"
+        ]
       },
-      { "name": "created", "type": "autodate", "onCreate": true, "onUpdate": false },
-      { "name": "updated", "type": "autodate", "onCreate": true, "onUpdate": true }
-    ]
+      {
+        "id": "autodate2990389176",
+        "name": "created",
+        "type": "autodate",
+        "onCreate": true,
+        "onUpdate": false
+      },
+      {
+        "id": "autodate3332085495",
+        "name": "updated",
+        "type": "autodate",
+        "onCreate": true,
+        "onUpdate": true
+      }
+    ],
+    "indexes": [],
+    "system": false
   }
 ]
