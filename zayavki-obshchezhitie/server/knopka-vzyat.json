@@ -1,5 +1,11 @@
 {
+  "updatedAt": "2026-10-30T09:00:29.998Z",
+  "createdAt": "2026-10-30T09:00:29.998Z",
+  "id": "InN5kB5XtKELztIj",
   "name": "Кнопка «Взять»",
+  "description": null,
+  "active": true,
+  "isArchived": false,
   "nodes": [
     {
       "parameters": {
@@ -17,8 +23,9 @@
       "typeVersion": 1.2,
       "position": [
         0,
-        0
-      ]
+        144
+      ],
+      "id": "1379d0ef-fd3f-4576-aec2-7f39b840117b"
     },
     {
       "parameters": {
@@ -42,9 +49,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        220,
-        0
-      ]
+        224,
+        144
+      ],
+      "id": "f6b316fb-8ec5-4b83-854e-63130c5dc46b"
     },
     {
       "parameters": {
@@ -74,9 +82,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        440,
-        0
-      ]
+        448,
+        144
+      ],
+      "id": "701e2ce7-9f6d-49b7-8013-0d73a137ff77"
     },
     {
       "parameters": {
@@ -100,9 +109,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        660,
-        -140
-      ]
+        672,
+        0
+      ],
+      "id": "318ee314-a3b1-4241-82da-01b6112991cd"
     },
     {
       "parameters": {
@@ -113,9 +123,10 @@
       "type": "n8n-nodes-base.splitOut",
       "typeVersion": 1,
       "position": [
-        660,
-        100
-      ]
+        672,
+        240
+      ],
+      "id": "4f885f18-cbeb-495a-b717-86a56c2888a8"
     },
     {
       "parameters": {
@@ -166,8 +177,9 @@
       "typeVersion": 3.4,
       "position": [
         880,
-        100
-      ]
+        240
+      ],
+      "id": "aa44ab1e-7c36-4775-b491-3b158de88f14"
     },
     {
       "parameters": {
@@ -182,9 +194,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1100,
-        100
-      ]
+        1104,
+        240
+      ],
+      "id": "8393ba8f-9ddd-4990-bb20-3e4317920e14"
     },
     {
       "parameters": {
@@ -198,9 +211,17 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        1320,
-        100
+        1328,
+        240
       ],
+      "id": "587fb520-8e5d-48d9-9ed7-5d8b4f647afa",
+      "webhookId": "3348e057-c31f-44eb-bd33-d650087a8369",
+      "credentials": {
+        "telegramApi": {
+          "id": "dzvOmvGWlCdJ1gH2",
+          "name": "Telegram account"
+        }
+      },
       "onError": "continueRegularOutput"
     },
     {
@@ -215,9 +236,17 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        1540,
-        100
+        1552,
+        240
       ],
+      "id": "e36b8ac8-198c-4b93-8384-8206ecff372d",
+      "webhookId": "27ffd24d-cde3-43c4-8b7f-6d1cb1d6ec31",
+      "credentials": {
+        "telegramApi": {
+          "id": "dzvOmvGWlCdJ1gH2",
+          "name": "Telegram account"
+        }
+      },
       "onError": "continueRegularOutput"
     }
   ],
@@ -257,8 +286,7 @@
             "type": "main",
             "index": 0
           }
-        ],
-        []
+        ]
       ]
     },
     "По одному": {
@@ -305,5 +333,52 @@
         ]
       ]
     }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "staticData": {
+    "node:Каждые 10 секунд": {
+      "recurrenceRules": [
+        null
+      ],
+      "recurrenceRuleSignatures": [
+        null
+      ]
+    }
+  },
+  "meta": null,
+  "nodeGroups": [],
+  "pinData": {},
+  "versionId": "4ee8ec9e-4203-475e-ad5d-d1efc1591fb3",
+  "activeVersionId": "4ee8ec9e-4203-475e-ad5d-d1efc1591fb3",
+  "versionCounter": 1,
+  "triggerCount": 1,
+  "sourceWorkflowId": null,
+  "tags": [],
+  "shared": [
+    {
+      "updatedAt": "2026-10-30T09:00:30.006Z",
+      "createdAt": "2026-10-30T09:00:30.006Z",
+      "role": "workflow:owner",
+      "workflowId": "InN5kB5XtKELztIj",
+      "projectId": "dS0cqLi79EsS9qyJ",
+      "project": {
+        "updatedAt": "2026-10-29T09:30:05.960Z",
+        "createdAt": "2026-10-29T09:28:36.760Z",
+        "id": "dS0cqLi79EsS9qyJ",
+        "name": "Ekaterina Kotelnikova <miss.meow.mya@gmail.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "customTelemetryTags": [],
+        "creatorId": "afa7cd3c-81e8-472a-9402-f097750a9737"
+      }
+    }
+  ],
+  "versionMetadata": {
+    "name": "Version 4ee8ec9e",
+    "description": ""
   }
 }

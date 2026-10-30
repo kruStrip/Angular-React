@@ -1,5 +1,11 @@
 {
+  "updatedAt": "2026-10-30T08:52:53.763Z",
+  "createdAt": "2026-10-30T08:52:35.193Z",
+  "id": "XBXunZyNL2AqSsoG",
   "name": "ИИ-диспетчер",
+  "description": null,
+  "active": true,
+  "isArchived": false,
   "nodes": [
     {
       "parameters": {
@@ -16,7 +22,8 @@
         0,
         0
       ],
-      "webhookId": "zayavka"
+      "webhookId": "zayavka",
+      "id": "fa59f3f1-109b-4508-bce0-d410d80221b5"
     },
     {
       "parameters": {
@@ -33,12 +40,13 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        220,
+        224,
         0
       ],
       "retryOnFail": true,
       "maxTries": 3,
-      "waitBetweenTries": 1000
+      "waitBetweenTries": 1000,
+      "id": "398a0257-f60d-4f59-b540-97b1110a70e3"
     },
     {
       "parameters": {
@@ -88,9 +96,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        440,
+        448,
         0
-      ]
+      ],
+      "id": "4d2e90ed-8b5a-42cf-b15a-1c506b3807c9"
     },
     {
       "parameters": {
@@ -105,9 +114,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        660,
+        672,
         0
-      ]
+      ],
+      "id": "c0e1a744-fa04-4c2e-ae67-83b17233899e"
     },
     {
       "parameters": {
@@ -140,7 +150,15 @@
       "position": [
         880,
         0
-      ]
+      ],
+      "id": "ccca4023-0da9-4cf9-8c56-7144835a6322",
+      "webhookId": "ef357814-59e0-4b35-bfe4-01ae273d4d0b",
+      "credentials": {
+        "telegramApi": {
+          "id": "dzvOmvGWlCdJ1gH2",
+          "name": "Telegram account"
+        }
+      }
     }
   ],
   "connections": {
@@ -188,5 +206,43 @@
         ]
       ]
     }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "staticData": null,
+  "meta": null,
+  "nodeGroups": [],
+  "pinData": {},
+  "versionId": "f9f49d3c-ceaf-44c2-9ef7-6fa63f9c0caf",
+  "activeVersionId": "f9f49d3c-ceaf-44c2-9ef7-6fa63f9c0caf",
+  "versionCounter": 2,
+  "triggerCount": 1,
+  "sourceWorkflowId": null,
+  "tags": [],
+  "shared": [
+    {
+      "updatedAt": "2026-10-30T08:52:35.200Z",
+      "createdAt": "2026-10-30T08:52:35.200Z",
+      "role": "workflow:owner",
+      "workflowId": "XBXunZyNL2AqSsoG",
+      "projectId": "dS0cqLi79EsS9qyJ",
+      "project": {
+        "updatedAt": "2026-10-29T09:30:05.960Z",
+        "createdAt": "2026-10-29T09:28:36.760Z",
+        "id": "dS0cqLi79EsS9qyJ",
+        "name": "Ekaterina Kotelnikova <miss.meow.mya@gmail.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "customTelemetryTags": [],
+        "creatorId": "afa7cd3c-81e8-472a-9402-f097750a9737"
+      }
+    }
+  ],
+  "versionMetadata": {
+    "name": "Version f9f49d3c",
+    "description": ""
   }
 }
