@@ -2,7 +2,9 @@
 
 Доска заявок для общежития колледжа (вариант «Общежитие»). Жильцы оставляют заявки о поломках, комендант ведёт их по статусам «Новая» → «В работе» → «Готово».
 
-В [проекте модуля 1](<../module 1/>) заявки хранились в `localStorage` одного браузера. В модуле 2 доска переехала на сервер:
+Задание: [проект модуля 2](https://maximbytecamp.github.io/angular_react_makarov/temy/29-proekt-doska-s-bazoy/index.html).
+
+В [проекте модуля 1](../p1-obshchezhitie/) заявки хранились в `localStorage` одного браузера. В модуле 2 доска переехала на сервер:
 
 | Что | Модуль 1 | Модуль 2 |
 |-----|----------|----------|
@@ -93,7 +95,7 @@ const { requests, loading, error, retry, add, next, prev, remove } = useRequests
 
 ### 8. ИИ-диспетчер со своими категориями
 
-После сохранения в PocketBase доска отправляет заявку (уже с её `id`) на вебхук n8n `http://localhost:5678/webhook/zayavka` (`src/notify.ts`). Процесс «ИИ-диспетчер» (`server/ii-dispetcher.json`):
+После сохранения в PocketBase доска отправляет заявку (уже с её `id`) на вебхук n8n `http://localhost:5678/webhook/zayavka` (`src/notify.ts`). Процесс «ИИ-диспетчер» (`n8n/ii-dispetcher.json`):
 
 ![Процесс «ИИ-диспетчер» в n8n](screenshots/n8n-ii-dispetcher.png)
 
@@ -111,7 +113,7 @@ const { requests, loading, error, retry, add, next, prev, remove } = useRequests
 
 ### 9. Кнопка «Взять» переводит заявку в работу
 
-Процесс «Кнопка «Взять»» (`server/knopka-vzyat.json`) раз в 10 секунд забирает нажатия методом `getUpdates`, отмечает их прочитанными, записывает в `obshchezhitie` статус «В работе», отвечает мастеру «Заявка ваша» и дописывает в сообщение «✅ Взял: имя».
+Процесс «Кнопка «Взять»» (`n8n/knopka-vzyat.json`) раз в 10 секунд забирает нажатия методом `getUpdates`, отмечает их прочитанными, записывает в `obshchezhitie` статус «В работе», отвечает мастеру «Заявка ваша» и дописывает в сообщение «✅ Взял: имя».
 
 ![Процесс «Кнопка «Взять»» в n8n](screenshots/n8n-knopka-vzyat.png)
 
@@ -149,9 +151,10 @@ npm run lint
 
 Нужны Node.js и Docker.
 
-1. **Сервер.** В папке с `compose.yaml` (`server/` или `avtomatizaciya/`) создайте файл `.env` по образцу: `TELEGRAM_TOKEN=токен-от-BotFather`. Затем:
+1. **Сервер.** В папке [`avtomatizaciya/`](../../avtomatizaciya/) создайте файл `.env` по образцу `.env.example`: `TELEGRAM_TOKEN=токен-от-BotFather`. Затем:
 
    ```bash
+   cd ../../avtomatizaciya
    docker compose up -d
    docker compose exec ollama ollama pull qwen2.5:3b
    ```
@@ -166,7 +169,7 @@ npm run lint
 
    Импортируйте `server/pb-obshchezhitie.json` (Settings → Import collections) и добавьте заявки.
 
-3. **n8n.** Снимите с публикации процесс модуля 1 «Заявка → Telegram»: адрес `/webhook/zayavka` может слушать только один процесс. Импортируйте `server/ii-dispetcher.json` и `server/knopka-vzyat.json`. В узлах Telegram выберите учётные данные бота, в «ИИ-диспетчере» впишите Chat ID. Опубликуйте оба процесса.
+3. **n8n.** Снимите с публикации процесс модуля 1 «Заявка → Telegram»: адрес `/webhook/zayavka` может слушать только один процесс. Импортируйте `n8n/ii-dispetcher.json` и `n8n/knopka-vzyat.json`. В узлах Telegram выберите учётные данные бота, в «ИИ-диспетчере» впишите Chat ID. Опубликуйте оба процесса.
 
 4. **Доска.**
 
@@ -182,13 +185,11 @@ npm run lint
 ## Структура
 
 ```
-server/
-  compose.yaml           — n8n, PocketBase и Ollama в Docker
-  pocketbase/Dockerfile  — образ PocketBase
-  pb-obshchezhitie.json  — коллекция obshchezhitie с правилами для импорта
+n8n/
   ii-dispetcher.json     — процесс n8n «ИИ-диспетчер»
   knopka-vzyat.json      — процесс n8n «Кнопка «Взять»»
-  zayavka-telegram.json  — сценарий модуля 1 «Заявка → Telegram»
+server/
+  pb-obshchezhitie.json  — коллекция obshchezhitie с правилами для импорта
 src/
   App.tsx              — экран доски: фильтр, поиск, сообщения, эффекты экрана
   components/

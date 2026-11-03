@@ -1,6 +1,8 @@
-# Заявки в общежитие
+# Заявки в общежитие · проект модуля 1
 
-Доска заявок для общежития колледжа. Жильцы оставляют заявки о поломках, комендант ведёт их по статусам. О каждой новой заявке приходит уведомление в Telegram через n8n.
+Доска заявок для общежития колледжа (вариант «Общежитие»). Жильцы оставляют заявки о поломках, комендант ведёт их по статусам. О каждой новой заявке приходит уведомление в Telegram через n8n.
+
+Задание: [проект модуля 1](https://maximbytecamp.github.io/angular_react_makarov/temy/19-proekt-doska-zayavok/index.html).
 
 Сделано на React + TypeScript + Vite.
 
@@ -47,10 +49,10 @@ npm run dev
 
 Без n8n доска тоже работает, но уведомления в Telegram приходить не будут. Для n8n нужен установленный Docker.
 
-1. **Запустите n8n** из папки `server/` (вместе с ним запустится и PocketBase, см. ниже):
+1. **Запустите n8n** из папки [`avtomatizaciya/`](../../avtomatizaciya/) (вместе с ним запустится и PocketBase, см. ниже). Если файла `.env` ещё нет, создайте его по образцу `.env.example` и впишите токен бота:
 
    ```bash
-   cd server
+   cd ../../avtomatizaciya
    docker compose up -d --build
    ```
 
@@ -60,7 +62,7 @@ npm run dev
 
 3. **Узнайте свой Chat ID.** Откройте в браузере `https://api.telegram.org/bot<токен>/getUpdates`, подставив токен бота. Chat ID — это число в поле `"chat": {"id": ...}`.
 
-4. **Импортируйте сценарий.** В n8n создайте новый workflow, в меню `⋯` выберите **Import from File** и укажите `server/zayavka-telegram.json`.
+4. **Импортируйте сценарий.** В n8n создайте новый workflow, в меню `⋯` выберите **Import from File** и укажите `../../avtomatizaciya/zayavka-telegram.json`.
 
 5. **Настройте узел Telegram.** Откройте его двойным щелчком:
    - в **Credential** выберите **Create new credential** и вставьте токен бота;
@@ -73,7 +75,7 @@ npm run dev
 Остановить n8n и PocketBase:
 
 ```bash
-cd server
+cd ../../avtomatizaciya
 docker compose down
 ```
 
@@ -83,7 +85,7 @@ docker compose down
 
 Чтобы заявки видели все, а не только один браузер, они будут храниться на сервере [PocketBase](https://pocketbase.io). Доска к нему пока не подключена и работает с `localStorage`.
 
-PocketBase 0.40.6 запускается в Docker той же командой, что и n8n: образ собирается по `server/pocketbase/Dockerfile`, база хранится в томе `pb_data`. API открывается на http://localhost:8090, панель администратора на http://localhost:8090/_/.
+PocketBase 0.40.6 запускается в Docker той же командой, что и n8n: образ собирается по `avtomatizaciya/pocketbase/Dockerfile`, база хранится в томе `pb_data`. API открывается на http://localhost:8090, панель администратора на http://localhost:8090/_/.
 
 1. **Создайте администратора** (пароль не короче 8 символов):
 
@@ -117,10 +119,6 @@ PocketBase 0.40.6 запускается в Docker той же командой,
 ## Структура
 
 ```
-server/
-  compose.yaml           — запуск n8n и PocketBase в Docker
-  pocketbase/Dockerfile  — образ PocketBase
-  zayavka-telegram.json  — сценарий «Заявка → Telegram» для импорта
 src/
   App.tsx              — доска: список, фильтр, поиск, смена статусов, эффекты
   components/
@@ -131,3 +129,5 @@ src/
   storage.ts           — сохранение в localStorage
   notify.ts            — отправка заявки в n8n
 ```
+
+Docker-стенд n8n и PocketBase, а также сценарий «Заявка → Telegram» лежат в общей папке [`avtomatizaciya/`](../../avtomatizaciya/).

@@ -1,3 +1,14 @@
-avtomatizaciya/
-sdacha/
+# зависимости и сборка восстанавливаются командами npm install и npm run build
+node_modules/
+dist/
+*.tsbuildinfo
+# секреты: токен бота и пароли хранятся только у вас на компьютере
 .env
+.env.*
+!.env.example
+# файлы моделей занимают гигабайты
+*.gguf
+# системные файлы
+.DS_Store
+Thumbs.db
+.idea/
