@@ -1,0 +1,8 @@
+[
+  { "id": "angular-react", "name": "Справочник по Angular и React", "url": "https://maximbytecamp.github.io/angular_react_makarov/" },
+  { "id": "git", "name": "Справочник по Git и GitHub", "url": "https://maximbytecamp.github.io/git_github_makarov/" },
+  { "id": "mongodb", "name": "Справочник по MongoDB", "url": "https://maximbytecamp.github.io/mongodb_theory_makarov/" },
+  { "id": "english", "name": "Разговорный английский", "url": "https://maximbytecamp.github.io/english_makarov/" },
+  { "id": "sysprog", "name": "Системное программирование", "url": "https://maximbytecamp.github.io/sysprog_makarov/" },
+  { "id": "staryy", "name": "Старый проект", "url": "https://maximbytecamp.github.io/staryy-proekt/" }
+]
