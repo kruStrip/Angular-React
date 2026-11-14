@@ -10,7 +10,7 @@
 | Задание | [проект модуля 3](https://maximbytecamp.github.io/angular_react_makarov/temy/39-proekt-monitoring/index.html) |
 | Автоматизация | [ночная проверка и оповещение](https://maximbytecamp.github.io/angular_react_makarov/temy/38-opoveshchenie/index.html) |
 
-Код проекта лежит в отдельном публичном репозитории `monitoring`; в папке курса — этот
+Код проекта лежит в отдельном публичном репозитории https://github.com/kruStrip/monitoring; в папке курса — этот
 README и журнал `ai-log.md`.
 
 ![Сообщение бота о сайте, который перестал открываться](screenshots/telegram-404.png)
@@ -125,7 +125,3 @@ src/
     AboutPage.tsx        — как устроена проверка
     NotFoundPage.tsx     — «Страница не найдена»
 ```
-
-## Что осталось сделать вручную
-
-- Уметь объяснить каждую строку кода — режим Р1; вопросы разобраны в `ai-log.md`.
