@@ -1,0 +1,52 @@
+name: Публикация на GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Проверки и сборка
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Линтер
+        run: npm run lint -- --deny-warnings
+      - name: Тесты
+        run: CI=true npm test
+      - name: Сборка
+        run: npm run build
+        env:
+          # Переменная репозитория: адрес веб-приложения Apps Script.
+          # Пока она не задана, сайт читает демонстрационный файл в том же формате.
+          VITE_DIGEST_URL: ${{ vars.VITE_DIGEST_URL || '/digest/data/news.json' }}
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+  deploy:
+    name: Публикация
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

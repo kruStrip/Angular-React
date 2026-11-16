@@ -8,6 +8,7 @@
 | `p1-<вариант>` | доска заявок своей службы | [проект модуля 1](https://maximbytecamp.github.io/angular_react_makarov/temy/19-proekt-doska-zayavok/index.html) | `zayavki` после главы 1.7 |
 | `p2-<вариант>` | доска заявок с базой | [проект модуля 2](https://maximbytecamp.github.io/angular_react_makarov/temy/29-proekt-doska-s-bazoy/index.html) | `zayavki` после главы 2.5 |
 | `p3-monitoring` | мониторинг сайтов группы | [проект модуля 3](https://maximbytecamp.github.io/angular_react_makarov/temy/39-proekt-monitoring/index.html) | отдельный репозиторий `monitoring` после автоматизации модуля 3 |
+| `p4-daydzhest` | дайджест новостей из Google Таблицы | [проект модуля 4](https://maximbytecamp.github.io/angular_react_makarov/temy/49-proekt-daydzhest/index.html) | отдельный репозиторий `digest` после автоматизации модуля 4 |
 
 Варианты: `obshchezhitie` (общежитие), `studsovet` (студсовет) или свой, согласованный с преподавателем.
 Пример: `projects/p1-obshchezhitie`.
@@ -19,4 +20,6 @@
 - `ai-log.md` — журнал работы с ИИ (правила — на странице проекта, раздел «Работа с ИИ»);
 - для проекта 2 — папка `n8n` с двумя процессами, выгруженными кнопкой Export JSON, без номера чата.
 - для проекта 3 — код не копируется: он в публичном репозитории `monitoring`. В `projects/p3-monitoring` лежат
-  `README.md` со ссылками на репозиторий и сайт на GitHub Pages и `ai-log.md`.
+  `README.md` со ссылками на репозиторий и сайт на GitHub Pages и `ai-log.md`;
+- для проекта 4 — код в публичном репозитории `digest`, здесь его копия, задания агенту, журнал и снимки;
+  ссылки на репозиторий и сайт — в `README.md` проекта.
