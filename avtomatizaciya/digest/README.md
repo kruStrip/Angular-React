@@ -63,12 +63,18 @@ curl -sL -H "Content-Type: application/json" -d '{"key":"неверный","news
 
 ## §3 Модель
 
-Нужна `qwen3:4b-instruct` в Ollama на компьютере (глава 4.3):
+Нужна модель `qwen3.5:4b` в Ollama на компьютере (глава 4.3):
 
 ```bash
-ollama pull qwen3:4b-instruct
-ollama run qwen3:4b-instruct "Ответь одним словом: работает?"
+ollama pull qwen3.5:4b
+ollama run qwen3.5:4b "Ответь одним словом: работает?"
 ```
+
+В узле «Модель» вместе с именем модели передаётся `think: false`. Без этого флага
+модель сначала пишет длинные рассуждения: одна новость обрабатывается около минуты,
+а пятнадцать новостей не укладываются в таймаут. С флагом ответ приходит примерно
+за 1,6 секунды. `qwen3:4b-instruct` из главы 4.3 в реестре сейчас недоступна,
+поэтому взята установленная `qwen3.5:4b`.
 
 n8n в Docker обращается к ней по `http://host.docker.internal:11434`. На Linux адрес
 работает благодаря строке `extra_hosts` в `compose.yaml`.
@@ -77,7 +83,7 @@ n8n в Docker обращается к ней по `http://host.docker.internal:1
 замените адрес на `http://ollama:11434/api/chat` и выполните:
 
 ```bash
-docker compose exec ollama ollama pull qwen3:4b-instruct
+docker compose exec ollama ollama pull qwen3.5:4b
 ```
 
 ## §4 n8n
